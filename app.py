@@ -124,16 +124,10 @@ with tab_diag:
         level = "alta" if top["correlacion"] > 0.7 else "media" if top["correlacion"] > 0.4 else "baja"
         right.markdown(
             f"**{S.SPECIAL.get(top['a'], top['a'])}** y **{S.SPECIAL.get(top['b'], top['b'])}** son los que más se mueven juntos: correlación de "
-            f"**{top['correlacion']:.2f}** ({level}). El promedio entre todos tus pares es {top['promedio']:.2f}.
-
-"
-            "- Cerca de **1**: suben y bajan a la vez; tener los dos diversifica poco.
-"
-            "- Cerca de **0**: se mueven por separado; juntos reducen el riesgo.
-"
-            "- **Negativa**: cuando uno cae, el otro tiende a subir.
-
-"
+            f"**{top['correlacion']:.2f}** ({level}). El promedio entre todos tus pares es {top['promedio']:.2f}.\n\n"
+            "- Cerca de **1**: suben y bajan a la vez; tener los dos diversifica poco.\n"
+            "- Cerca de **0**: se mueven por separado; juntos reducen el riesgo.\n"
+            "- **Negativa**: cuando uno cae, el otro tiende a subir.\n\n"
             "El depósito en soles no aparece porque su retorno no cambia día a día.")
 
 with tab_sug:
