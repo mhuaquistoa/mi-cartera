@@ -30,7 +30,7 @@ Hoy lo resuelve con una hoja de cálculo propia o no lo resuelve.
 
 El usuario escribe lo que tiene (activo, monto y moneda) y recibe:
 
-1. **Diagnóstico en soles:** retorno, volatilidad, peor caída, concentración y dependencia del dólar, frente al S&P 500 y a un depósito.
+1. **Diagnóstico en soles:** retorno, volatilidad, peor caída, concentración, correlación entre activos y dependencia del dólar, frente al S&P 500 y a un depósito.
 2. **Portafolio sugerido** para su nivel de riesgo (conservador, moderado o agresivo), evaluado en un periodo que el optimizador no vio.
 3. **Niveles de riesgo y escenarios:** su portafolio junto a los tres perfiles, y qué pasaría con una caída como la de 2022, un mercado −20 % o −35 %, o un dólar ±10 %.
 4. **Asesor:** un LLM explica los números en español claro y cita el manual de criterios.

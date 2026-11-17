@@ -63,3 +63,21 @@ def concentration(w: pd.Series) -> dict:
 def usd_exposure(w: pd.Series) -> float:
     """Parte del portafolio cuyo valor en soles depende del dólar."""
     return float(w.drop(labels=[S.DEPOSIT], errors="ignore").sum())
+
+
+def correlations(rets: pd.DataFrame, w: pd.Series) -> pd.DataFrame:
+    """Correlación de los retornos diarios en soles entre los activos del portafolio.
+
+    El depósito no entra: su retorno es constante y no tiene correlación definida.
+    """
+    assets = [a for a in w.index if a != S.DEPOSIT and w[a] > 0]
+    return rets[assets].corr()
+
+
+def most_correlated(corr: pd.DataFrame) -> dict | None:
+    """El par de activos distintos que más se mueven juntos."""
+    if len(corr) < 2:
+        return None
+    pairs = corr.where(np.triu(np.ones(corr.shape, dtype=bool), k=1)).stack()
+    a, b = pairs.idxmax()
+    return {"a": a, "b": b, "correlacion": float(pairs.max()), "promedio": float(pairs.mean())}

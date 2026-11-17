@@ -52,3 +52,14 @@ def test_bm25_finds_the_relevant_chunk():
     ]
     assert knowledge.search("tipo de cambio y dólares", chunks)[0]["id"] == "b:p3:c0"
     assert knowledge.search("xyz", chunks) == []
+
+
+def test_correlations_exclude_deposit_and_find_top_pair():
+    rets = _rets()
+    rets["QQQ"] = rets["SPY"] * 1.2 + 0.0001          # casi idéntico a SPY
+    w = pd.Series({"SPY": 0.3, "QQQ": 0.3, "BND": 0.2, S.DEPOSIT: 0.2})
+    corr = M.correlations(rets, w)
+    assert S.DEPOSIT not in corr.index
+    top = M.most_correlated(corr)
+    assert {top["a"], top["b"]} == {"SPY", "QQQ"} and top["correlacion"] > 0.99
+    assert M.most_correlated(corr.loc[["SPY"], ["SPY"]]) is None

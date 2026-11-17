@@ -26,8 +26,11 @@ def analyze(positions: pd.DataFrame, px: pd.DataFrame, fx: pd.Series, rates: dic
         levels.append({"Portafolio": name, **full, "retorno_prueba": block(ws, test)["retorno"]})
 
     w_sug = suggested[profile]
+    corr = M.correlations(rets, w)
+    top = M.most_correlated(corr)
     return {
         "rets": rets, "pesos": w, "pesos_sugeridos": w_sug, "sugeridos": suggested,
+        "correlaciones": corr, "par_mas_correlacionado": top,
         "r_actual": r_now, "r_bench": bench, "test": test,
         "niveles": pd.DataFrame(levels),
         "escenarios_actual": scenarios.run(w, rets),
@@ -42,6 +45,7 @@ def analyze(positions: pd.DataFrame, px: pd.DataFrame, fx: pd.Series, rates: dic
             "beta_vs_sp500": round(M.beta(r_now, bench), 2),
             "concentracion": _r({**M.concentration(w), "mayor": _name(M.concentration(w)["mayor"])}),
             "exposicion_dolar": round(M.usd_exposure(w), 3),
+            "par_mas_correlacionado": top and {"activos": [_name(top["a"]), _name(top["b"])], **_r({"correlacion": top["correlacion"], "correlacion_promedio": top["promedio"]})},
             "perfil_elegido": profile,
             "pesos_sugeridos": _named(w_sug),
             "sugerido": _r(block(w_sug, rets)),

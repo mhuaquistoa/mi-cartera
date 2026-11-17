@@ -112,6 +112,30 @@ with tab_diag:
             f"Tu portafolio se comporta como si tuviera **{conc['activos_efectivos']:.1f} activos** de igual tamaño. "
             f"Por cada 1 % que se mueve el S&P 500, el tuyo se mueve {R['beta_vs_sp500']:.2f} %.")
 
+    corr, top = res["correlaciones"], res["par_mas_correlacionado"]
+    if top:
+        st.subheader("¿Tus activos se mueven juntos?")
+        names = [NAMES.get(a, a) if a in S.SPECIAL else a for a in corr.index]
+        left, right = st.columns([3, 2])
+        left.plotly_chart(
+            px.imshow(corr.values, x=names, y=names, zmin=-1, zmax=1, color_continuous_scale="RdBu_r",
+                      text_auto=".2f", aspect="auto", labels={"color": "Correlación"})
+            .update_layout(title="Correlación entre tus activos (retornos diarios en soles)"), width="stretch")
+        level = "alta" if top["correlacion"] > 0.7 else "media" if top["correlacion"] > 0.4 else "baja"
+        right.markdown(
+            f"**{S.SPECIAL.get(top['a'], top['a'])}** y **{S.SPECIAL.get(top['b'], top['b'])}** son los que más se mueven juntos: correlación de "
+            f"**{top['correlacion']:.2f}** ({level}). El promedio entre todos tus pares es {top['promedio']:.2f}.
+
+"
+            "- Cerca de **1**: suben y bajan a la vez; tener los dos diversifica poco.
+"
+            "- Cerca de **0**: se mueven por separado; juntos reducen el riesgo.
+"
+            "- **Negativa**: cuando uno cae, el otro tiende a subir.
+
+"
+            "El depósito en soles no aparece porque su retorno no cambia día a día.")
+
 with tab_sug:
     ws = res["pesos_sugeridos"]
     ws = ws[ws > 0].sort_values()
