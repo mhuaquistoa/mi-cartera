@@ -57,6 +57,14 @@ streamlit run app.py
 
 Sin la clave, todo funciona menos la pestaña *Asesor*.
 
+**Capturas**
+
+| Diagnóstico en soles | Portafolio sugerido y prueba fuera de muestra |
+|---|---|
+| ![Diagnóstico](docs/img/1_diagnostico.png) | ![Portafolio sugerido](docs/img/2_sugerido.png) |
+
+![Asesor con recomendaciones citadas](docs/img/3_asesor.png)
+
 **Arquitectura**
 
 ```mermaid
