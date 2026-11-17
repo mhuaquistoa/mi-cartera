@@ -1,6 +1,6 @@
 # Conversaciones con usuarios potenciales
 
-Tres personas respondieron por escrito el mismo cuestionario de 4 preguntas.
+Tres personas respondieron por escrito el mismo cuestionario de 4 preguntas el 16 de noviembre de 2026.
 
 | Nota | Perfil |
 |---|---|

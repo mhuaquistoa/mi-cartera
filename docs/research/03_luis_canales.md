@@ -1,7 +1,8 @@
 # Luis Canales
 
 **Perfil:** inversionista activo, 21 años, opera acciones y ETFs por su cuenta.
-**Formato:** respuestas escritas a un cuestionario de 4 preguntas. Autorizó aparecer con su nombre.
+**Fecha:** 16 de noviembre de 2026.
+**Formato:** respuestas escritas a un cuestionario de 4 preguntas, transcritas por el founder. Autorizó aparecer con su nombre.
 
 **1. ¿En qué tienes tu plata hoy?**
 Tengo una cuenta de brokerage con ETFs (la mayoría indexados al S&P 500 y algo de tecnología), algunas acciones individuales que compré por convicción, y un colchón en dólares en una cuenta remunerada para no quedarme sin liquidez.

@@ -1,7 +1,8 @@
 # Gonzalo Montes
 
 **Perfil:** conservador, 21 años, prioriza preservar capital y liquidez.
-**Formato:** respuestas escritas a un cuestionario de 4 preguntas. Autorizó aparecer con su nombre.
+**Fecha:** 16 de noviembre de 2026.
+**Formato:** respuestas escritas a un cuestionario de 4 preguntas, transcritas por el founder. Autorizó aparecer con su nombre.
 
 **1. ¿En qué tienes tu plata hoy?**
 Casi todo está en depósitos a plazo en soles y una parte en dólares físicos "por si acaso". Tengo un fondo mutuo conservador que me recomendó el banco hace un par de años, pero no sé bien qué tiene adentro.

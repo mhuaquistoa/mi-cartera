@@ -1,7 +1,8 @@
 # Eiji Nuñez
 
 **Perfil:** inversionista mixto, 21 años, combina ahorro tradicional con instrumentos nuevos.
-**Formato:** respuestas escritas a un cuestionario de 4 preguntas. Autorizó aparecer con su nombre.
+**Fecha:** 16 de noviembre de 2026.
+**Formato:** respuestas escritas a un cuestionario de 4 preguntas, transcritas por el founder. Autorizó aparecer con su nombre.
 
 **1. ¿En qué tienes tu plata hoy?**
 Una parte en dólares guardados, un fondo mutuo de renta fija que abrí hace tiempo, algo de ETFs que compré el año pasado siguiendo recomendaciones de redes sociales, y una pequeña posición en cripto que ya casi ni reviso.
