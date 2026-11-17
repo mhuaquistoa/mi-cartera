@@ -10,7 +10,9 @@ Hacemos **diagnósticos de portafolio** para **inversionistas peruanos no expert
 
 ## 2. Founder
 
-Mauricio Huaquisto, estudiante de la Universidad del Pacífico (Data Science con Python, 2026-II).
+**Mauricio Huaquisto.** Estudiante de Finanzas en la Universidad del Pacífico, practicante en la mesa de inversiones de MAPFRE y encargado de prácticas de matemáticas.
+
+Por qué yo: en la mesa de inversiones veo cómo se mide y se controla un portafolio institucional (retorno en moneda local, riesgo, comparación contra un índice), y como encargado de prácticas explico ideas cuantitativas a quien las ve por primera vez. MiCartera une las dos cosas: llevar ese análisis al inversionista que recién empieza, con finanzas, matemáticas y machine learning.
 
 ## 3. Problema
 
