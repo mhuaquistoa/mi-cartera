@@ -4,7 +4,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SNAPSHOT = ROOT / "data" / "snapshot"
 KNOWLEDGE = ROOT / "data" / "knowledge" / "chunks.json"
-PDF_DIR = ROOT / "conocimiento"
 
 YEARS = 5
 TRADING_DAYS = 252

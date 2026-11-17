@@ -108,6 +108,19 @@ Por qué estas: sin las APIs no hay diagnóstico en soles; sin la salida estruct
 
 El código se escribió con Claude Code: los módulos de `src/`, la interfaz, las pruebas y este README. Las decisiones de producto son del founder: medir en soles, comparar contra el S&P 500, sugerir un portafolio por nivel de riesgo, agregar escenarios más allá de las crisis y construir una base de conocimiento a partir de bibliografía de inversiones.
 
+## Base de conocimiento
+
+El asesor se apoya en [data/knowledge/chunks.json](data/knowledge/chunks.json): 17 criterios de inversión redactados con palabras propias, cada uno con el libro y la página del PDF de donde sale. Los libros no se publican.
+
+| Fuente | Temas |
+|---|---|
+| Malkiel, *A Random Walk Down Wall Street* | Diversificación, rebalanceo, fondos índice, plazo, aportes periódicos, exceso de confianza |
+| Graham, *The Intelligent Investor* | Regla 25–75 entre renta fija y acciones, margen de seguridad |
+| Gibson, *Asset Allocation* | Disciplina de rebalanceo |
+| Schweser CFA 2025, *Portfolio Management* | Riesgo sistemático, ratio de Sharpe, VaR, asignación estratégica |
+| Shiller, *Irrational Exuberance* | Valorización y retornos futuros |
+| Kahneman, *Thinking, Fast and Slow* | Aversión a la pérdida y marco estrecho |
+
 ## Límites conocidos
 
 - Se asume que los tickers cotizan en dólares.
@@ -122,7 +135,7 @@ El código se escribió con Claude Code: los módulos de `src/`, la interfaz, la
 |---|---|
 | `app.py` | Interfaz (Streamlit). Solo muestra; no calcula. |
 | `src/` | Lógica: datos, métricas, optimizador, escenarios, base de conocimiento, asesor. |
-| `scripts/` | Copia de datos y construcción del conocimiento. |
+| `scripts/` | Actualiza la copia local de datos. |
 | `data/snapshot/` | Copia local de precios, tipo de cambio y tasas. |
 | `data/knowledge/` | Manual de criterios de inversión que usa el asesor. |
 | `conocimiento/` | PDF fuente (locales, no se suben). |
