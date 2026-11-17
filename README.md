@@ -1,11 +1,49 @@
 # MiCartera
 
-Diagnóstico de portafolios para el inversionista peruano: mide tu portafolio en soles,
-lo compara con el S&P 500 y con un depósito, y propone una alternativa para tu nivel de riesgo.
+**Hacemos diagnósticos de portafolio para inversionistas peruanos no expertos, mediante datos de mercado en vivo, un optimizador por nivel de riesgo y un asesor con LLM que se apoya en un manual de criterios de inversión.**
 
-README completo en construcción (se completa antes de la presentación).
+Herramienta educativa. No es asesoría financiera personalizada.
 
-## Cómo correrlo
+## 1. One-liner
+
+Hacemos **diagnósticos de portafolio** para **inversionistas peruanos no expertos** mediante **datos en vivo (Yahoo Finance y BCRP), un optimizador por nivel de riesgo y un asesor con LLM y RAG**.
+
+## 2. Founder
+
+Mauricio Huaquisto, estudiante de la Universidad del Pacífico (Data Science con Python, 2026-II).
+
+## 3. Problema
+
+Quien empieza a invertir en el Perú suele tener la plata repartida: un depósito en soles, dólares en efectivo, alguna acción y un ETF comprado desde una app. Con eso no puede responder tres preguntas básicas:
+
+- **¿Me está yendo bien?** Las apps muestran la ganancia de cada activo en su moneda, no la del conjunto en soles, y no la comparan con nada.
+- **¿Cuánto riesgo llevo?** No sabe cuánto de su patrimonio depende del dólar ni cuánto podría caer en un mal año.
+- **¿Qué cambiaría?** Un asesor financiero atiende patrimonios grandes; para montos pequeños la alternativa son videos y foros.
+
+Hoy lo resuelve con una hoja de cálculo propia o no lo resuelve.
+
+Las notas de las conversaciones con usuarios potenciales van en [docs/research/](docs/research/).
+
+## 4. Solución e insight
+
+El usuario escribe lo que tiene (activo, monto y moneda) y recibe:
+
+1. **Diagnóstico en soles:** retorno, volatilidad, peor caída, concentración y dependencia del dólar, frente al S&P 500 y a un depósito.
+2. **Portafolio sugerido** para su nivel de riesgo (conservador, moderado o agresivo), evaluado en un periodo que el optimizador no vio.
+3. **Niveles de riesgo y escenarios:** su portafolio junto a los tres perfiles, y qué pasaría con una caída como la de 2022, un mercado −20 % o −35 %, o un dólar ±10 %.
+4. **Asesor:** un LLM explica los números en español claro y cita el manual de criterios.
+
+**Insight:** el inversionista peruano vive en soles pero invierte en dólares. Un portafolio que "sube" en dólares puede estar plano en soles; por eso todo se mide en soles con el tipo de cambio diario del BCRP. Y el LLM no calcula nada: los números salen de código probado, y el modelo solo los explica.
+
+## 5. Why now
+
+- **Acceso:** desde hace pocos años un peruano puede comprar acciones y ETFs de EE. UU. desde el celular con montos pequeños. Hay más inversionistas nuevos que asesores.
+- **Costo:** explicar un portafolio con un LLM cuesta alrededor de US$ 0.0014, medido en este proyecto.
+- **Datos abiertos:** el BCRP publica tipo de cambio y tasas por API, sin clave.
+
+## 6. Demo
+
+**Cómo correrlo**
 
 ```
 python -m venv .venv
@@ -15,16 +53,78 @@ copy .env.example .env   # y pon tu DEEPSEEK_API_KEY
 streamlit run app.py
 ```
 
+Sin la clave, todo funciona menos la pestaña *Asesor*.
+
+**Arquitectura**
+
+```mermaid
+flowchart LR
+    U[Usuario: activos, montos, perfil] --> APP[app.py · Streamlit]
+    APP --> D[src/data.py]
+    D -->|precios| YF[Yahoo Finance]
+    D -->|tipo de cambio y tasas| BCRP[API del BCRP]
+    D -.si fallan.-> SNAP[(data/snapshot)]
+    APP --> AN[src/analysis.py]
+    AN --> M[metrics.py · en soles]
+    AN --> O[optimize.py · perfiles de riesgo]
+    AN --> E[scenarios.py]
+    AN -->|resumen numérico| ADV[src/advisor.py]
+    K[(data/knowledge · manual de criterios)] -->|BM25| ADV
+    ADV -->|JSON estructurado| LLM[DeepSeek]
+    ADV --> APP
+```
+
+**Modelos y APIs, y por qué**
+
+| Pieza | Elección | Por qué |
+|---|---|---|
+| Precios | Yahoo Finance (`yfinance`) | Gratis, sin clave, cubre acciones y ETFs de EE. UU. y ADR peruanos |
+| Tipo de cambio y tasas | API del BCRP (`PD04640PD`, `PD12301MD`, `PN07816NM`) | Fuente oficial; permite medir todo en soles |
+| LLM | DeepSeek `deepseek-flash`, modo JSON | Barato y suficiente para redactar a partir de números ya calculados |
+| Recuperación | BM25 propio sobre el manual | Corre en un servidor gratuito sin descargar un modelo de embeddings |
+| Optimizador | `scipy` (SLSQP) | Máximo retorno esperado con tope de volatilidad y de peso por activo |
+
+Si Yahoo o el BCRP no responden, la app usa la copia de `data/snapshot/` y lo indica en la pestaña *Datos y método*.
+
+## 7. Modelo de negocio
+
+- **Quién paga:** el inversionista minorista, con una suscripción.
+- **Precio:** S/ 15 al mes. El diagnóstico básico es gratis; el plan pagado incluye el portafolio sugerido, los escenarios y el asesor.
+- **Costo por usuario:** una explicación del asesor cuesta US$ 0.0014 medidos (tarifa de horario pico). Con 20 explicaciones al mes son US$ 0.03, unos S/ 0.10. Los datos de mercado no tienen costo y el servidor es el plan gratuito de Streamlit Community Cloud.
+- **Qué sigue:** alertas cuando el portafolio se aleja del perfil elegido, y carga de posiciones desde el estado de cuenta del bróker.
+
+## 8. Herramientas del curso
+
+| Herramienta | Sesión | Dónde está |
+|---|---|---|
+| APIs de datos (BCRP y Yahoo Finance) | 03 | [src/data.py](src/data.py) |
+| LLM con salidas estructuradas | 08 | [src/advisor.py](src/advisor.py) |
+| RAG: recuperación sobre el manual de criterios, con cita de documento y página | 08 | [src/knowledge.py](src/knowledge.py) |
+| Dashboard | 05 | [app.py](app.py) |
+
+Por qué estas: sin las APIs no hay diagnóstico en soles; sin la salida estructurada no se puede comprobar que cada cita del asesor corresponda a un fragmento entregado.
+
+## 9. Qué hizo el agente
+
+El código se escribió con Claude Code: los módulos de `src/`, la interfaz, las pruebas y este README. Las decisiones de producto son del founder: medir en soles, comparar contra el S&P 500, sugerir un portafolio por nivel de riesgo, agregar escenarios más allá de las crisis y construir una base de conocimiento a partir de bibliografía de inversiones.
+
+## Límites conocidos
+
+- Se asume que los tickers cotizan en dólares.
+- No incluye comisiones ni impuestos.
+- Cinco años de historia no cubren todas las crisis; el escenario de −35 % se estima con la sensibilidad al S&P 500, no con datos de 2020.
+- El portafolio sugerido se calcula con retornos pasados. Que haya superado al S&P 500 en la prueba no garantiza que lo haga en adelante.
+- La recuperación es por palabras (BM25), no por significado.
+
 ## Estructura
 
 | Carpeta | Qué contiene |
 |---|---|
 | `app.py` | Interfaz (Streamlit). Solo muestra; no calcula. |
 | `src/` | Lógica: datos, métricas, optimizador, escenarios, base de conocimiento, asesor. |
-| `scripts/` | Tareas que se corren a mano: copia de datos y construcción del conocimiento. |
-| `data/snapshot/` | Copia local de precios, tipo de cambio y tasas, por si las fuentes fallan. |
+| `scripts/` | Copia de datos y construcción del conocimiento. |
+| `data/snapshot/` | Copia local de precios, tipo de cambio y tasas. |
 | `data/knowledge/` | Manual de criterios de inversión que usa el asesor. |
 | `conocimiento/` | PDF fuente (locales, no se suben). |
 | `docs/research/` | Notas de conversaciones con usuarios. |
-| `docs/img/` | Capturas y diagramas. |
 | `tests/` | Pruebas unitarias y de humo. |
