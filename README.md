@@ -24,7 +24,7 @@ Quien empieza a invertir en el Perú suele tener la plata repartida: un depósit
 
 Hoy lo resuelve con una hoja de cálculo propia o no lo resuelve.
 
-Las notas de las conversaciones con usuarios potenciales van en [docs/research/](docs/research/).
+**Evidencia:** tres inversionistas de 21 años con perfiles distintos (conservador, mixto y activo) respondieron un cuestionario; las notas están en [docs/research/](docs/research/). Dos no comparan su resultado contra nada formal, dos tienen la plata repartida sin una vista del total, y el más activo no sabe cuándo está concentrado ni cuándo rebalancear. Los tres pagarían S/ 15 al mes, dos con condiciones: que se explique en simple y que entregue un análisis que no puedan hacer solos.
 
 ## 4. Solución e insight
 
