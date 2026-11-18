@@ -59,6 +59,8 @@ streamlit run app.py
 
 Sin la clave, todo funciona menos la pestaña *Asesor*.
 
+**Versión pública:** el Asesor usa un modelo de pago, así que está protegido con un código (`ADVISOR_CODE`, en `.env` o en los *secrets* del despliegue). Sin el código, la pestaña muestra una respuesta real guardada en `data/example_advice.json`, y el resto de la app funciona completo.
+
 **Capturas**
 
 | Diagnóstico en soles | Portafolio sugerido y prueba fuera de muestra |

@@ -1,4 +1,6 @@
 """Interfaz de MiCartera. La lógica vive en src/; aquí solo se muestra."""
+import json
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -182,7 +184,20 @@ with tab_asesor:
     st.subheader("Explicación del diagnóstico")
     st.caption(f"Un LLM explica los números de las otras pestañas y se apoya en la base de conocimiento "
                f"({len(chunks)} fragmentos de {len({c['doc'] for c in chunks})} documentos). No calcula nada.")
-    if not advisor.api_key():
+    if not st.session_state.get("asesor_ok"):
+        code = st.text_input("Código de acceso del Asesor", type="password",
+                             help="El Asesor usa un modelo de pago. En la versión pública solo lo usa el autor.")
+        if code and st.session_state.get("intentos", 0) >= 5:
+            st.error("Demasiados intentos. Recarga la página.")
+        elif code and advisor.unlocked(code):
+            st.session_state["asesor_ok"] = True
+            st.rerun()
+        elif code:
+            st.session_state["intentos"] = st.session_state.get("intentos", 0) + 1
+            st.error("Código incorrecto.")
+        st.info("El Asesor está bloqueado en la versión pública. El resto de la app funciona completo. "
+                "Abajo, un ejemplo de lo que responde.")
+    elif not advisor.api_key():
         st.warning("Falta la clave DEEPSEEK_API_KEY (en .env o en los secrets del despliegue).")
     elif st.button("Explícame mi portafolio", type="primary"):
         try:
@@ -191,6 +206,10 @@ with tab_asesor:
         except Exception as e:
             st.error(f"El asesor no respondió ({type(e).__name__}). Las demás pestañas no dependen de él.")
     out = st.session_state.get("diag")
+    if not out and not st.session_state.get("asesor_ok") and S.EXAMPLE_ADVICE.exists():
+        out = json.loads(S.EXAMPLE_ADVICE.read_text(encoding="utf-8"))
+        st.caption("Ejemplo con un portafolio de muestra (depósito de S/ 15 000, dólares, BAP, NVDA y SPY), "
+                   "no con el que escribiste a la izquierda.")
     if out:
         st.write(out.get("resumen", ""))
         left, right = st.columns(2)

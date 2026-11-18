@@ -63,3 +63,11 @@ def test_correlations_exclude_deposit_and_find_top_pair():
     top = M.most_correlated(corr)
     assert {top["a"], top["b"]} == {"SPY", "QQQ"} and top["correlacion"] > 0.99
     assert M.most_correlated(corr.loc[["SPY"], ["SPY"]]) is None
+
+
+def test_advisor_is_locked_without_code(monkeypatch):
+    from src import advisor
+    monkeypatch.delenv("ADVISOR_CODE", raising=False)
+    assert advisor.unlocked("") is False and advisor.unlocked("cualquiera") is False
+    monkeypatch.setenv("ADVISOR_CODE", "secreto")
+    assert advisor.unlocked("secreto") is True and advisor.unlocked("otro") is False

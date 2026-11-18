@@ -20,3 +20,17 @@ assert not at.exception and not at.error
 assert len(at.metric) == 5 and len(at.dataframe) >= 3, "la app no llegó a dibujar todo"
 assert any("mueven juntos" in s.value for s in at.subheader), "falta la matriz de correlaciones"
 print("OK: la app dibujó todas las secciones")
+
+# Asesor: bloqueado para visitantes, desbloqueado con el código
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+assert any("bloqueado" in i.value for i in at.info), "el asesor debería verse bloqueado"
+assert any("Fuente:" in m.value for m in at.markdown), "falta el ejemplo con fuentes"
+at.text_input[0].set_value("codigo-malo").run()
+assert any("incorrecto" in e.value for e in at.error)
+at.text_input[0].set_value(os.environ["ADVISOR_CODE"]).run()
+assert at.session_state["asesor_ok"] and any(b.label == "Explícame mi portafolio" for b in at.button)
+print("OK: el asesor se bloquea y se desbloquea con el código")

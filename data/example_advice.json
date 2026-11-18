@@ -1,0 +1,91 @@
+{
+ "resumen": "Tu portafolio actual rinde 14.85% con volatilidad de 14.2% y una caída máxima de -18.8%, mientras que el S&P 500 rindió 7.27% con más volatilidad (17.47%) y una caída peor (-28.31%). La cartera sugerida para tu perfil Moderado busca un retorno de 19.73% con volatilidad de 16.37% y un Sharpe de 0.93, pero concentra 35% en oro (GLD) y tiene 61.5% de exposición al dólar. En la prueba fuera de muestra el portafolio sugerido rindió 16.15% frente al 10.55% del S&P 500, aunque con más volatilidad y peor caída que tu cartera actual.",
+ "hallazgos": [
+  {
+   "titulo": "Tu cartera actual ya supera al S&P 500 en retorno y riesgo",
+   "explicacion": "El portafolio actual rinde 14.85% con volatilidad de 14.2% y Sharpe de 0.73, frente al S&P 500 que rinde 7.27% con volatilidad de 17.47% y Sharpe de 0.16. Además, tu peor caída fue -18.8% frente a -28.31% del índice, y tu beta de 0.64 indica que te mueves menos que el mercado."
+  },
+  {
+   "titulo": "Alta concentración en depósito a plazo y en dólares",
+   "explicacion": "El 38.5% de tu cartera está en un depósito a plazo en soles, lo que te da un HHI de 0.2525 y solo 3.96 activos efectivos. A la vez, tu exposición al dólar es 61.5%, sumando dólares en efectivo, NVDA y SPY, lo que te deja muy expuesto al tipo de cambio."
+  },
+  {
+   "titulo": "La cartera sugerida mejora el Sharpe pero concentra en oro",
+   "explicacion": "La cartera sugerida sube el Sharpe a 0.93 y el retorno a 19.73%, pero coloca 35% en GLD y mantiene 17.2% en NVDA. NVDA y SPY tienen correlación de 0.70, muy por encima del promedio de 0.25, así que parte de esa diversificación es aparente. La volatilidad también sube a 16.37% y la peor caída a -23.3%."
+  }
+ ],
+ "recomendaciones": [
+  {
+   "accion": "Mantén una base de renta fija y depósitos entre 25% y 75%, y rebalancea cuando se desvíe unos 5 puntos",
+   "por_que": "Tu perfil es Moderado y hoy el depósito a plazo pesa 38.5%. La regla del inversionista defensivo sugiere repartir entre renta fija de alta calidad y acciones líderes, sin bajar del 25% ni superar el 75% en renta fija, y volver a la proporción cuando el mercado la mueva.",
+   "cita": {
+    "id": "graham-25-75",
+    "doc": "Graham, The Intelligent Investor",
+    "pagina": 36,
+    "tema": "asignación de activos",
+    "texto": "Regla del inversionista defensivo: repartir el portafolio entre renta fija de alta calidad (bonos, depósitos) y acciones líderes, sin que la renta fija baje de 25 % ni suba de 75 %; las acciones ocupan el resto. La opción más simple es 50 y 50, y volver a esa proporción cuando el mercado la haya movido unos 5 puntos. Un perfil conservador se acerca al 75 % en renta fija; uno agresivo, al 25 %.",
+    "puntaje": 8.34
+   }
+  },
+  {
+   "accion": "Pasa de tu cartera actual a la sugerida por partes, con aportes periódicos, en lugar de hacer todo el cambio en un solo día",
+   "por_que": "Invertir un monto fijo a intervalos regulares reduce, aunque no elimina, el riesgo de comprar todo el portafolio a precios inflados y sirve para migrar de una cartera a otra por partes.",
+   "cita": {
+    "id": "malkiel-aportes-periodicos",
+    "doc": "Malkiel, A Random Walk Down Wall Street",
+    "pagina": 332,
+    "tema": "cómo ejecutar cambios",
+    "texto": "Aportes periódicos: invertir un monto fijo a intervalos regulares, por ejemplo cada mes, reduce (no elimina) el riesgo de comprar todo el portafolio a precios inflados. Sirve para pasar de un portafolio a otro por partes en lugar de hacer el cambio completo en un solo día.",
+    "puntaje": 4.26
+   }
+  },
+  {
+   "accion": "Reduce la concentración en GLD y en NVDA, y diversifica hacia activos que no se muevan igual",
+   "por_que": "Combinar activos que no se mueven igual reduce el riesgo sin sacrificar rentabilidad, y un portafolio concentrado en pocos activos parecidos lleva riesgo que se puede eliminar. NVDA y SPY tienen correlación de 0.70, muy por encima del promedio de 0.25, y GLD pesaría 35% en la cartera sugerida.",
+   "cita": {
+    "id": "malkiel-diversificacion-50",
+    "doc": "Malkiel, A Random Walk Down Wall Street",
+    "pagina": 180,
+    "tema": "diversificación",
+    "texto": "Diversificación y concentración: combinar activos que no se mueven igual reduce el riesgo del portafolio sin sacrificar rentabilidad. Con unas cincuenta acciones de tamaño parecido y de sectores distintos el riesgo total baja más de 60 %; agregar más casi no ayuda. Cincuenta acciones del mismo sector no cuentan como diversificación. Un portafolio concentrado en un solo activo o en pocos activos parecidos lleva riesgo que se puede eliminar.",
+    "puntaje": 4.62
+   }
+  }
+ ],
+ "comparacion_sp500": "En el periodo completo tu cartera actual rindió 14.85% frente al 7.27% del S&P 500, con menos volatilidad y menor caída máxima. En la prueba fuera de muestra el portafolio sugerido rindió 16.15% frente al 10.55% del S&P 500, pero con más volatilidad (16.65% vs 12.82%) y una caída máxima de -12.82% frente a -6.96% del índice.",
+ "costo_usd": 0.0017619,
+ "fuentes": [
+  {
+   "id": "malkiel-horizonte",
+   "doc": "Malkiel, A Random Walk Down Wall Street",
+   "pagina": 330,
+   "tema": "plazo y riesgo",
+   "texto": "El riesgo real de invertir en acciones depende del plazo. En periodos de veinticinco años la rentabilidad de las acciones varió poco entre el mejor y el peor periodo, mientras que en un solo año puede variar muchísimo. Quien necesita el dinero pronto debe tener más renta fija y depósitos; quien invierte a largo plazo puede tolerar más volatilidad.",
+   "puntaje": 11.39
+  },
+  {
+   "id": "graham-25-75",
+   "doc": "Graham, The Intelligent Investor",
+   "pagina": 36,
+   "tema": "asignación de activos",
+   "texto": "Regla del inversionista defensivo: repartir el portafolio entre renta fija de alta calidad (bonos, depósitos) y acciones líderes, sin que la renta fija baje de 25 % ni suba de 75 %; las acciones ocupan el resto. La opción más simple es 50 y 50, y volver a esa proporción cuando el mercado la haya movido unos 5 puntos. Un perfil conservador se acerca al 75 % en renta fija; uno agresivo, al 25 %.",
+   "puntaje": 8.34
+  },
+  {
+   "id": "malkiel-diversificacion-50",
+   "doc": "Malkiel, A Random Walk Down Wall Street",
+   "pagina": 180,
+   "tema": "diversificación",
+   "texto": "Diversificación y concentración: combinar activos que no se mueven igual reduce el riesgo del portafolio sin sacrificar rentabilidad. Con unas cincuenta acciones de tamaño parecido y de sectores distintos el riesgo total baja más de 60 %; agregar más casi no ayuda. Cincuenta acciones del mismo sector no cuentan como diversificación. Un portafolio concentrado en un solo activo o en pocos activos parecidos lleva riesgo que se puede eliminar.",
+   "puntaje": 4.62
+  },
+  {
+   "id": "malkiel-aportes-periodicos",
+   "doc": "Malkiel, A Random Walk Down Wall Street",
+   "pagina": 332,
+   "tema": "cómo ejecutar cambios",
+   "texto": "Aportes periódicos: invertir un monto fijo a intervalos regulares, por ejemplo cada mes, reduce (no elimina) el riesgo de comprar todo el portafolio a precios inflados. Sirve para pasar de un portafolio a otro por partes en lugar de hacer el cambio completo en un solo día.",
+   "puntaje": 4.26
+  }
+ ]
+}

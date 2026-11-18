@@ -33,6 +33,28 @@ def api_key() -> str | None:
     return key or None
 
 
+def _secret(name: str) -> str | None:
+    value = os.getenv(name)
+    if not value:
+        try:
+            import streamlit as st
+            value = st.secrets.get(name)
+        except Exception:
+            value = None
+    return value or None
+
+
+def unlocked(entered: str) -> bool:
+    """Compara el código escrito con ADVISOR_CODE. Sin código configurado, nadie entra.
+
+    El Asesor gasta saldo de la clave del LLM; con la app pública, el código evita
+    que un visitante lo use.
+    """
+    import hmac
+    expected = _secret("ADVISOR_CODE")
+    return bool(expected) and hmac.compare_digest(entered.encode(), expected.encode())
+
+
 def query_for(datos: dict) -> str:
     """Consulta para la base de conocimiento, armada con lo que más pesa en el diagnóstico."""
     terms = ["diversificación", "riesgo", "portafolio", "rentabilidad"]
